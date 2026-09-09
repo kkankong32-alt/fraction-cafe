@@ -1,0 +1,164 @@
+.game-stage .modal-close{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;max-width:48px!important;max-height:48px!important;aspect-ratio:1;border-radius:50%!important;padding:0!important;flex:0 0 48px;display:block;position:relative;line-height:1}
+.game-stage .modal-close svg{position:absolute;left:50%;top:50%;width:22px;height:22px;transform:translate(-50%,-50%);display:block}
+.audio-panel{padding-top:68px}.audio-panel .modal-close{position:absolute;top:8px;right:8px}
+.equipment-setup{display:flex;align-items:center;justify-content:space-evenly;gap:4%;width:100%;flex:1;min-height:0;padding:3%}
+.equipment-setup>.quantity{width:32%;max-width:32%;height:80%}.equipment-setup>div:last-child{text-align:center;flex:1}.equipment-setup h3{font-size:clamp(24px,2cqw,40px)}.equipment-setup p{margin:.6em 0;font-size:clamp(18px,1.3cqw,28px)}.division-choices{display:flex;gap:10px;justify-content:center;margin:15px 0}.game-stage .division-choices button{min-width:56px;min-height:56px;font-size:clamp(24px,2cqw,40px);padding:.25em .55em}
+.cup-division{animation:division-snap .25s both;transform-origin:left}@keyframes division-snap{from{scale:0 1;opacity:0}to{scale:1;opacity:1}}
+.label-workshop{display:grid;grid-template-columns:35% 63%;gap:2%;width:100%;flex:1;min-height:0;padding:1%}.result-clue{display:flex;flex-direction:column;align-items:center;min-height:0;font-size:clamp(14px,1cqw,22px);font-weight:800;padding:3%}.result-clue>.quantity{margin:10px 0;flex:1}.result-clue .fraction-cup{width:90%;max-width:150px}.result-clue .whole-cups span{animation:regroup .7s}.label-editor{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:0}.label-editor h3{font-size:clamp(20px,1.65cqw,32px)}.editable-label{display:flex;gap:.25em;align-items:center;font-size:clamp(34px,3cqw,62px);background:#fffdf1;border:3px dashed #c89d67;border-radius:18px;padding:.12em .4em}.label-steppers{display:flex;gap:14px;justify-content:center}.label-steppers>div{text-align:center}.label-steppers>div>div{display:flex;align-items:center;gap:8px}.label-steppers small{font-size:clamp(13px,1cqw,20px)}.game-stage .label-steppers button{min-width:44px;min-height:44px;padding:0;width:44px;height:44px;font-size:24px;border-radius:12px}.label-steppers b{min-width:1em;text-align:center}.concept-hint{font-size:clamp(13px,.95cqw,19px);min-height:1.3em;text-align:center}.highlight-fill .cup-liquid{animation:fill-hint 1.4s infinite}@keyframes fill-hint{50%{filter:brightness(1.2);box-shadow:inset 0 0 0 4px #ffbd39}}
+.attached-label{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff9e9;border:2px solid #d8a651;border-radius:12px;font-size:clamp(24px,2cqw,40px);padding:4px 12px;animation:label-attach .5s both}.attached-label span{font-size:clamp(13px,1cqw,20px);color:#368c54}.serving-tray:has(.attached-label) .drink-zone{min-height:0}.serving-tray:has(.attached-label) button:not(:disabled){animation:snap .5s}@keyframes label-attach{from{opacity:0;transform:translate(-45px,-25px) rotate(-15deg) scale(1.3)}to{opacity:1;transform:none}}
+.special-shade{position:absolute;inset:9% 0 0;z-index:9;background:#53341d99;display:grid;place-items:center;padding:20px;backdrop-filter:blur(3px)}.special-panel{background:linear-gradient(#fff9d9,#f4d795);border:7px solid #dfac45;border-radius:24px;padding:20px;text-align:center;max-height:100%;overflow:auto;width:min(850px,92%);box-shadow:0 10px #936036}.special-panel>h2{color:#a66b16;font-size:clamp(28px,3cqw,52px)}.special-panel>p{margin:12px}.special-panel>p>.fraction{font-size:1.8em}.special-ingredients{display:grid;grid-template-columns:1fr 1fr;gap:20px}.special-ingredients>div{background:#fff7e1;border-radius:18px;padding:10px}.special-ingredients img{height:100px;max-width:100%;object-fit:contain}.special-ingredients>div>div{display:flex;justify-content:center;gap:10px;margin:10px 0}.game-stage .special-ingredients button{padding:8px 12px;font-size:clamp(24px,2.4cqw,40px)}.special-ingredients button[aria-pressed=true]{outline:4px solid #52a568;background:#def3d2!important}
+.help-cards.six-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.help-cards.six-steps article>img{height:8cqw;max-height:150px}.concept-examples{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}.concept-examples article{border:3px solid #e1bd85;border-radius:15px;padding:12px;background:#fffaf0}.concept-examples article>div{height:150px;display:flex;align-items:center;justify-content:center;gap:12px}.concept-examples .quantity{height:130px}.concept-examples .fraction{font-size:30px}
+@media(max-aspect-ratio:4/3){.mix-station:has(.label-workshop),.mix-station:has(.equipment-setup){min-height:420px}.label-workshop{min-height:340px}.equipment-setup{min-height:300px}.label-editor h3{font-size:22px}.special-shade{position:fixed;inset:0;z-index:15}.concept-examples{grid-template-columns:1fr}.serving-tray:has(.attached-label){min-height:420px}}
+@media(max-width:600px){.game-stage .modal-close{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;flex-basis:44px}.game-stage .modal-close svg{width:20px;height:20px}.label-workshop{grid-template-columns:27% 71%;padding:4px;min-height:355px}.editable-label{font-size:40px}.label-steppers{gap:8px}.label-steppers>div>div{gap:3px}.label-editor>button{font-size:18px}.concept-hint{font-size:13px}.equipment-setup{gap:10px;padding:8px}.equipment-setup>.quantity{max-width:25%;width:25%;height:210px}.division-choices{gap:6px}.game-stage .division-choices button{min-width:48px;padding:8px;font-size:26px}.equipment-setup p{font-size:18px}.equipment-setup small{font-size:13px}.attached-label{grid-column:2;grid-row:3;font-size:28px}.serving-tray:has(.attached-label){min-height:280px;grid-template-rows:auto 1fr auto auto}.serving-tray:has(.attached-label)>button{grid-row:4;grid-column:2;font-size:21px}.special-panel{padding:12px;width:100%}.special-ingredients{gap:10px}.special-ingredients>div{padding:5px}.special-ingredients>div>div{gap:6px}.game-stage .special-ingredients button{padding:6px;font-size:25px}.help-cards.six-steps{grid-template-columns:1fr 1fr}.help-cards.six-steps article>img{height:90px}}
+@media(prefers-reduced-motion:reduce){.cup-division,.attached-label,.result-clue .whole-cups span,.highlight-fill .cup-liquid{animation:none}}
+.label-editor>*{flex-shrink:0}.label-editor{gap:3px}.label-editor .editable-label{font-size:clamp(32px,2.4cqw,52px)}.label-editor>button{font-size:clamp(18px,1.2cqw,24px);padding:.35em .8em!important}.label-editor h3{font-size:clamp(20px,1.4cqw,28px)}
+.concept-retry .division-choices{animation:gentle-check .35s;outline:3px solid #e8bd65;outline-offset:6px;border-radius:15px}@keyframes gentle-check{25%{translate:-3px}75%{translate:3px}}
+.carry-pieces{width:95%;margin:4px 0;text-align:center}.carry-pieces>div{display:grid;gap:3px}.carry-pieces i{height:13px;border:1px solid #b18d63;border-radius:3px;animation:regroup .6s}.carry-pieces small{font-size:clamp(12px,.9cqw,18px)}
+.special-target{display:flex;justify-content:center;align-items:center;gap:20px;margin:10px auto;height:110px}.special-target>.quantity{flex:none;width:90px;height:100%}.special-target .fraction{font-size:clamp(30px,2.5cqw,50px)}
+.special-stock{grid-template-columns:repeat(3,1fr)}.special-stock>div{text-align:center}.special-stock h3{margin-bottom:.4em}.special-stock .fraction{font-size:clamp(26px,2.2cqw,44px)}
+/* GRAND COMPLETE: the four staff become a full-bleed hero layer standing at the screen edges — not a row of
+   small portraits — with the result content centered and allowed to overlap their lower bodies. */
+.grand-complete{position:relative;overflow:hidden;justify-content:flex-start;padding-bottom:1%}
+.grand-cast{position:absolute;inset:0;z-index:1;pointer-events:none}
+.gc-char{position:absolute;bottom:0;object-fit:contain;object-position:bottom;filter:drop-shadow(0 18px 16px #00000060)}
+.gc-yellow{left:0.5%;height:64%}
+.gc-green{left:16%;height:54%}
+.gc-blue{right:16%;height:54%}
+.gc-purple{right:0.5%;height:64%}
+.grand-center{position:relative;z-index:2;width:min(880px,70%);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:.5%;padding-top:1%}
+.grand-sub{color:#fff0c5;text-shadow:0 2px 6px #000a;background:#00000055;border-radius:99px;padding:.15em 1em;font-size:clamp(15px,1.2cqw,24px);text-align:center}
+.grand-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8%;width:100%}.grand-stats>div{background:#fff4d9f2;border:4px solid #c18850;border-radius:16px;text-align:center;padding:.35em}.grand-stats dt{font-size:clamp(12px,.95cqw,18px);color:#8a5a34}.grand-stats dd{margin:.1em 0 0;font-size:clamp(20px,1.9cqw,34px);font-weight:900;color:#744023}
+.grand-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:.7%;width:100%}.grand-badge{background:#fff8e9ee;border:3px solid #d8ad78;border-radius:14px;padding:.28em .5em;text-align:center}.grand-badge>b{display:block;color:#a66b16}.grand-badge>span{font-size:clamp(12px,.95cqw,18px)}
+.grand-trophy{display:inline-block;margin:0 auto;color:#5a2e0a;background:linear-gradient(#ffe38a,#ffbd21);border:4px solid #fff3cf;border-radius:999px;padding:.25em 1.1em;box-shadow:0 6px 0 #a7621c,0 10px 20px #0005;text-shadow:none;font-size:clamp(26px,2.6cqw,46px);animation:snap .5s both}
+@media(max-aspect-ratio:4/3){.grand-center{width:96%}.grand-stats,.grand-badges{grid-template-columns:repeat(2,1fr)}.gc-yellow,.gc-purple{height:40%}.gc-green,.gc-blue{height:34%}}
+@media(max-width:600px){.gc-char{opacity:.55}.gc-yellow,.gc-purple{height:30%}.gc-green,.gc-blue{height:26%}}
+
+/* Ingredient visual-weight correction: compensates for source PNGs whose bottle/carton silhouette fills its own canvas differently. */
+.ingredient-shelf img,.ticket-row>img{transform:scale(var(--ing-scale,1));transform-origin:center bottom}
+
+/* Bottle stock: size each bottle by how many are on screen so a lone bottle reads as a big, clearly-identifiable object
+   instead of a tiny icon adrift in a wide empty area. */
+.bottles img{max-height:100%}
+.bottles[data-count="1"] img{width:58%}
+.bottles[data-count="2"] img{width:44%}
+.bottles[data-count="3"] img{width:34%}
+.bottles[data-count="4"] img,.bottles[data-count="5"] img,.bottles[data-count="6"] img{width:26%}
+
+.regroup-note{display:block;margin-top:.2em;color:#7a4b1f;background:#fff2cf;border:2px dashed #cf9f5c;border-radius:10px;padding:.15em .6em;font-size:clamp(14px,1.05cqw,22px);animation:snap .4s both}
+
+/* Sound button: inline SVG icon replaces the Unicode glyph so it sits centered instead of drifting off the font baseline. */
+.sound-button{position:relative;display:grid;place-items:center}
+.sound-button svg{width:54%;height:54%;display:block;overflow:visible}
+.sound-button .sound-dot{position:absolute;right:6%;bottom:6%;width:22%;height:22%;border-radius:50%;border:2px solid #fffaf0}
+.sound-button .sound-dot.on{background:#3ecf72}
+.sound-button .sound-dot.off{background:#a9a9a9}
+.floating.sound-button{width:clamp(46px,3.2cqw,62px)!important;height:clamp(46px,3.2cqw,62px)!important;min-width:0!important;min-height:0!important;padding:0!important;background:linear-gradient(#fffaf0,#f6e2bb)!important;border:2px solid #c99a63!important;box-shadow:0 3px 0 #a97c48,0 4px 8px #5b301a22!important;color:#7a4b26;transition:transform .12s}
+.floating.sound-button:hover{transform:scale(1.04)}
+.floating.sound-button:active{transform:scale(.96)}
+@media(max-width:600px){.regroup-note{font-size:13px}}
+
+/* Regroup buttons (DAY5 "새 병 열기" / DAY6 "온전한 1 바꾸기") carry a short parenthetical that maps the cafe
+   action to the fraction meaning, so the two DAY-specific terms stay distinct but equally easy to follow. */
+.game-stage .regroup-btn{display:flex;flex-direction:column;gap:2px;line-height:1.15;padding:.45em .9em!important}
+.regroup-btn small{font-size:.52em;font-weight:700;opacity:.85}
+
+/* 1P/2P side-by-side preview: shown on the staff-select and DAY-select screens whenever 2인 대결 is chosen,
+   so both players' picks are visible together instead of only 1P. */
+.vs-preview{display:flex;align-items:center;justify-content:center;gap:3%;background:#fff4d9ef;border:5px solid #c18850;border-radius:22px;padding:1% 3%;box-shadow:0 5px #8a532f;margin:0 0 .6em}
+.vs-preview .vs-side{display:flex;flex-direction:column;align-items:center;gap:.15em;min-width:0}
+.vs-preview .vs-side img{height:clamp(64px,8.5cqw,140px);width:auto;object-fit:contain;filter:drop-shadow(0 6px 5px #0003)}
+.vs-preview .vs-side b{font-size:clamp(13px,1.15cqw,23px);white-space:nowrap}
+.vs-tag{border-radius:99px;padding:.1em .9em;font-weight:900;color:#fff;font-size:clamp(11px,.95cqw,19px)}
+.vs-tag.p1{background:linear-gradient(#ffce64,#ed9b29)}
+.vs-tag.p2{background:linear-gradient(#b591eb,#8351bf)}
+.vs-mid{font-weight:900;font-size:clamp(18px,1.9cqw,36px);color:#be7a25;text-shadow:0 2px #fff8}
+.vs-preview.compact{padding:.5% 3%;margin-bottom:.35em}
+.vs-preview.compact .vs-side img{height:clamp(50px,5.8cqw,92px)}
+
+/* 2인 대결 is one mode on every device — nothing here gates entry. This modal is shown once (first "2인 대결"
+   click; localStorage remembers it after that) to explain that multitouch screens let both players play at once,
+   while a mouse/single-touch screen shares the same split-screen by taking turns tapping each side. */
+.touch-info{position:relative;background:linear-gradient(#fff9d9,#f4d795);border:6px solid #dfac45;border-radius:24px;padding:8% 6%;text-align:center;width:min(560px,86%);box-shadow:0 10px #936036}
+.touch-info h2{font-size:clamp(24px,2.6cqw,42px);color:#a66b16;margin-bottom:.4em}
+.touch-info p{margin:.6em 0;font-size:clamp(15px,1.15cqw,22px);line-height:1.5}
+.touch-info nav{display:flex;justify-content:center;gap:12px;margin-top:1em;flex-wrap:wrap}
+.two-player-note{font-size:clamp(12px,1cqw,19px);color:#7a4b1f;background:#fff3cf;border:2px dashed #d8a651;border-radius:99px;padding:.2em 1em;text-align:center}
+/* Purely informational — navigator.maxTouchPoints never gates anything, this just briefly lets a multitouch
+   screen know both players can tap at once. Fades on its own and never blocks input (pointer-events:none). */
+.multitouch-hint{display:inline-block;background:#e9edf7;color:#4a5a8a;border:1px solid #b7c2e6;border-radius:99px;padding:.15em .9em;font-size:.85em;font-weight:900;margin-top:.4em;pointer-events:none;animation:hint-fade 4s ease-in forwards}
+@keyframes hint-fade{0%,60%{opacity:1}100%{opacity:0}}
+
+/* Battle arena: ONE shared order area (current customer / ticket / next customer, rendered once) sits above
+   two independent player workstations — not two complete Playfields glued side by side. Nintendo-style local
+   versus: the common problem is shown big, once, in the middle; only the hands-on controls split left/right. */
+/* Order/customer row bumped 32%→35% (workstations give up the difference automatically via their 1fr row) so
+   the shared ticket + both customers read a little less cramped; a small, deliberate shift, not a rebalance. */
+.battle-arena{height:100%;display:grid;grid-template-rows:9% 35% 1fr 6%;position:relative}
+.battle-vs-bar{display:flex;align-items:center;justify-content:space-between;gap:2%;background:linear-gradient(#fff9e9,#f2d29f);border-bottom:5px solid #ad733e;padding:0 2%;z-index:5;min-height:0}
+.battle-vs-bar .vs-side{display:flex;align-items:center;gap:.5em;min-width:0}
+.battle-vs-bar .p2-side{flex-direction:row-reverse}
+.battle-vs-bar .vs-side img{width:clamp(34px,3cqw,56px);height:clamp(34px,3cqw,56px);object-fit:cover;object-position:top;border-radius:50%;border:2px solid #fff;background:#ffcf77}
+.battle-vs-bar .vs-side b{font-size:clamp(14px,1.15cqw,22px);white-space:nowrap}
+.battle-vs-bar .vs-score{display:flex;flex-direction:column;align-items:center;font-size:clamp(13px,1.1cqw,21px);font-weight:900;background:#fff5d9;border-radius:10px;padding:.1em .6em;line-height:1.3;white-space:nowrap}
+.battle-vs-bar .vs-score small{font-size:.6em;color:#b05a2f}
+.battle-vs-bar .vs-mid{display:flex;flex-direction:column;align-items:center;gap:1px;flex:0 0 auto}
+.battle-vs-bar .vs-mid b{font-size:clamp(16px,1.7cqw,30px);color:#a1521f;text-shadow:0 1px #fff9}
+.battle-vs-bar .vs-mid .order-progress{font-size:clamp(11px,.9cqw,16px);background:none;border:0;padding:0}
+.battle-vs-bar .vs-mid .clock{font-size:clamp(10px,.8cqw,14px)}
+/* Sound/help move out of the shared center strip (they were fighting the VS/order info for attention) into a
+   small horizontal pair anchored top-right, out of the way of the shared order area's sightline. */
+.battle-corner-controls{position:absolute;top:6px;right:1%;display:flex;flex-direction:row;gap:6px;z-index:8}
+.battle-corner-controls button{width:clamp(28px,2.4cqw,42px);height:clamp(28px,2.4cqw,42px);padding:0!important;border-radius:50%!important;display:grid;place-items:center;font-size:clamp(13px,1.1cqw,18px)}
+.battle-arena .customer-lane{grid-template-columns:24% 48% 20%;padding:.5% 2%}
+.battle-workstations{display:flex;min-height:0;height:100%}
+/* Base layout stays side-by-side, same as 1P's cafe-counter (재료 선택 | 재료 계량하기 | 완성 음료 as three
+   columns each running the pane's full height) — NOT a top-to-bottom stack. The only structural change from 1P
+   is the ingredient column's own internal grid (2 cols x 3 rows instead of 3 x 2), which needs less width, so
+   that column is narrower here and the two freed percentage points go to the other two columns. */
+.workstation-pane{flex:1;min-width:0;height:100%;position:relative;display:grid;grid-template-columns:19% 52% 27%;gap:1%;padding:.8% 1%;container-type:inline-size;overflow:hidden}
+.workstation-pane>.ingredient-shelf,.workstation-pane>.mix-station,.workstation-pane>.serving-tray{height:100%;min-width:0}
+/* Only the ingredient grid itself changes shape: 2 columns x 3 rows instead of 3 x 2. The column is narrow but
+   tall (like 1P's cards, just narrower), so the base image-over-label card layout still fits it well — no need
+   to re-lay-out the card's internals. */
+.workstation-pane .ingredient-shelf>div{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
+.workstation-pane .ingredient-shelf b{font-size:clamp(10px,1.3cqw,16px);white-space:normal;line-height:1.1}
+/* The cup's own width is 50% of its .quantity slot (base rule) — raising just the max-width cap did nothing
+   because that 50%-of-slot math never reached the old 150px cap in the first place. Widen both the slot
+   (.quantity) and the cup's own percentage of it so the cup actually grows in this wider mix-station, instead
+   of sitting as a thin bar surrounded by empty space. */
+.workstation-pane .equipment-setup>.quantity{width:40%;max-width:40%}
+.workstation-pane .fraction-cup{width:78%;max-width:170px}
+.workstation-pane .playfield{font-size:clamp(13px,1.25cqw,22px)}
+.workstation-pane .special-shade{inset:0}
+.battle-divider{width:6px;flex:0 0 6px;background:linear-gradient(#e6bd83,#9a623e,#e6bd83)}
+.battle-waiting{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4em;background:#fff6dd;border-radius:18px}
+.battle-waiting .stars{font-size:clamp(24px,3.4cqw,46px);color:#ffbd21;text-shadow:0 2px #a7621c}
+.battle-waiting h2{font-size:clamp(18px,2cqw,30px)}
+.battle-waiting .score{font-size:clamp(26px,2.8cqw,44px);color:#744023}
+.battle-waiting p{font-size:clamp(13px,1.1cqw,18px);opacity:.75}
+.order-compare-banner{position:absolute;left:50%;top:9%;transform:translate(-50%,-50%);z-index:6;background:#2d1b0fee;color:#ffe9b8;font-weight:900;border-radius:99px;padding:.3em 1.2em;font-size:clamp(13px,1.15cqw,22px);box-shadow:0 6px 16px #0006;animation:snap .3s both;white-space:nowrap}
+@media(max-aspect-ratio:4/3){.battle-arena{grid-template-rows:auto auto 1fr auto;height:auto;min-height:100%}.battle-vs-bar{flex-wrap:wrap;padding:6px 50px 6px 6px}.battle-corner-controls{top:4px;right:4px}.battle-arena .customer-lane{grid-template-columns:1fr;height:auto}.battle-workstations{flex-direction:column}.battle-divider{width:100%;height:6px;flex-basis:6px}.workstation-pane{height:auto;min-height:560px;grid-template-columns:1fr;grid-template-rows:260px 260px 150px}.workstation-pane>.ingredient-shelf,.workstation-pane>.mix-station,.workstation-pane>.serving-tray{width:100%;height:auto}}
+
+/* DAY-select, 2P mode: both picked characters stand at the screen edges (P1 left / P2 right) instead of a
+   single 1P portrait, so "two people are getting ready together" reads immediately. */
+.day-menu{position:relative}
+.day-portrait{position:absolute;bottom:2%;height:60%;display:flex;flex-direction:column;align-items:center;gap:.3em;z-index:1}
+.day-portrait img{flex:1;min-height:0;width:auto;max-width:26cqw;object-fit:contain;filter:drop-shadow(0 10px 8px #0004)}
+.day-portrait b{font-size:clamp(13px,1.1cqw,22px);background:#fff2ce;border-radius:99px;padding:.05em .8em}
+.day-portrait.p1{left:3%}
+.day-portrait.p2{right:3%}
+.day-menu.two-player .day-cards{width:60%;margin:0 auto}
+@media(max-aspect-ratio:4/3){.day-portrait{position:static;height:140px;flex-direction:row;background:#fff4d9d9;border-radius:16px;padding:6px 10px}.day-portrait img{max-width:80px}.day-menu.two-player{padding-top:0}.day-menu.two-player .day-cards{width:95%}}
+@media(max-width:600px){.day-portrait{height:90px}.day-portrait img{max-width:60px}}
+
+/* Record management: reachable from the same 소리 설정 panel everywhere outside gameplay. Resetting always
+   writes straight through to localStorage via saveData — not just UI state. */
+.record-manage{width:100%;display:flex;flex-direction:column;gap:8px;margin-top:12px;padding-top:12px;border-top:2px dashed #d8ad78}
+.record-manage h3{font-size:clamp(14px,1.1cqw,20px);color:#7a4b1f;margin-bottom:2px}
+.record-manage button{font-size:clamp(13px,1cqw,18px)}
+.game-stage .danger{background:linear-gradient(#ff9376,#dd4e34)!important;color:#fff!important;box-shadow:0 .25em 0 #a3341f!important}
+.reset-confirm{position:relative;background:linear-gradient(#fff5e6,#f7ddb8);border:6px solid #d99a52;border-radius:24px;padding:8% 6%;text-align:center;width:min(480px,86%);box-shadow:0 10px #936036}
+.reset-confirm h2{font-size:clamp(22px,2.4cqw,38px);color:#a6321f;margin-bottom:.4em}
+.reset-confirm p{margin:.5em 0;font-size:clamp(14px,1.1cqw,20px)}
+.reset-confirm .reset-warn{color:#a6321f;font-weight:900;font-size:clamp(12px,.95cqw,17px)}
+.reset-confirm nav{display:flex;justify-content:center;gap:12px;margin-top:1em;flex-wrap:wrap}

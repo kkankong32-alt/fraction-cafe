@@ -1,0 +1,11 @@
+import {readFile} from 'node:fs/promises';
+import {JSDOM} from 'jsdom';
+import vm from 'node:vm';
+const html=await readFile('index.html','utf8');
+const dom=new JSDOM(html);
+const scripts=[...dom.window.document.querySelectorAll('script')];
+if(scripts.length!==1||scripts[0].src)throw Error('Standalone needs one inline script');
+new vm.Script(scripts[0].textContent);
+if(dom.window.document.body.textContent.trim())throw Error('Leaked code in document body');
+if(dom.window.document.querySelectorAll('#root').length!==1)throw Error('Invalid root');
+console.log('Standalone HTML: parsed, JavaScript syntax valid, no leaked code, one application root.');
