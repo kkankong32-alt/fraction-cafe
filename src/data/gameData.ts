@@ -24,8 +24,8 @@ export const customers = [1,2,3,4,5].map((id) => ({
 export const drinks = [
   { name: '레몬에이드', file: 'D01_LEMON_ADE.png', ingredients: [0,1], liquid: '#ffe562' },
   { name: '매실에이드', file: 'D02_MAESIL_ADE.png', ingredients: [0,2], liquid: '#b7d94b' },
-  { name: '딸기라테', file: 'D03_STRAWBERRY_LATTE.png', ingredients: [3,4], liquid: '#f39da8' },
-  { name: '초코라테', file: 'D04_CHOCOLATE_LATTE.png', ingredients: [3,5], liquid: '#9b6246' }
+  { name: '딸기라떼', file: 'D03_STRAWBERRY_LATTE.png', ingredients: [3,4], liquid: '#f39da8' },
+  { name: '초코라떼', file: 'D04_CHOCOLATE_LATTE.png', ingredients: [3,5], liquid: '#9b6246' }
 ];
 
 // scale corrects for source PNGs whose bottle silhouette doesn't fill its canvas the same way as the others
