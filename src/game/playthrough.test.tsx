@@ -12,11 +12,11 @@ vi.mock('../assets',()=>({asset:(s:string)=>s,manifest:{},preload:vi.fn()}));
 afterEach(()=>{cleanup();vi.useRealTimers()});
 const click=(name:string)=>fireEvent.click(screen.getByRole('button',{name}));
 const units=(v:{whole:number;numerator:number;denominator:number})=>v.whole*v.denominator+v.numerator;
-function bonus(seed:number,dayId:number){if(!screen.queryByRole('heading',{name:/특별 주문|긴급 주문/}))return;const c=specialChallenge(seed,dayId);if(c.type==='combine'){click('탄산수 '+c.d+'분의 '+c.a);click('레몬 베이스 '+c.d+'분의 '+c.b);click('재료 조합 완성!')}else{click('사용량 '+c.d+'분의 '+c.use);click('사용량 선택 완료!')}click('보너스 받고 영업 계속하기')}
+function bonus(seed:number,dayId:number){if(!screen.queryByRole('heading',{name:/특별 주문|긴급 주문/}))return;const c=specialChallenge(seed,dayId);if(c.type==='combine'){click('탄산수 '+c.d+'분의 '+c.a+'컵');click('레몬 베이스 '+c.d+'분의 '+c.b+'컵');click('재료 조합 완성!')}else{click('사용량 '+c.d+'분의 '+c.use+'컵');click('사용량 선택 완료!')}click('보너스 받고 영업 계속하기')}
 function measure(day:number,o:Order){if(day<3){for(const [i,v] of [o.left,o.right].entries()){click(ingredients[drinks[o.drink].ingredients[i]].name);for(let n=0;n<units(v);n++)click('붓기');click('계량 완료')}}else{click(ingredients[drinks[o.drink].ingredients[1]].name);if(day>=5)click(day===5?'새 병 열기':'온전한 1 바꾸기');for(let n=0;n<units(o.right);n++)click('재료 덜기');click('계량 완료')}click(day<3?'합치기':'재고 확인')}
 function label(day:number,o:Order){const n=day<3?units(o.left)+units(o.right):units(o.left)-units(o.right);for(let i=0;i<Math.floor(n/o.denominator);i++)click('온전한 수 늘리기');if(n%o.denominator===0)click('분자 줄이기');else for(let i=0;i<n%o.denominator;i++)click('분자 늘리기');click(day<3?'완성량 확인':'남은 양 확인')}
 const clickIn=(el:HTMLElement,name:string)=>fireEvent.click(within(el).getByRole('button',{name}));
-function bonusIn(el:HTMLElement,seed:number,dayId:number){if(!within(el).queryByRole('heading',{name:/특별 주문|긴급 주문/}))return;const c=specialChallenge(seed,dayId);if(c.type==='combine'){clickIn(el,'탄산수 '+c.d+'분의 '+c.a);clickIn(el,'레몬 베이스 '+c.d+'분의 '+c.b);clickIn(el,'재료 조합 완성!')}else{clickIn(el,'사용량 '+c.d+'분의 '+c.use);clickIn(el,'사용량 선택 완료!')}clickIn(el,'보너스 받고 영업 계속하기')}
+function bonusIn(el:HTMLElement,seed:number,dayId:number){if(!within(el).queryByRole('heading',{name:/특별 주문|긴급 주문/}))return;const c=specialChallenge(seed,dayId);if(c.type==='combine'){clickIn(el,'탄산수 '+c.d+'분의 '+c.a+'컵');clickIn(el,'레몬 베이스 '+c.d+'분의 '+c.b+'컵');clickIn(el,'재료 조합 완성!')}else{clickIn(el,'사용량 '+c.d+'분의 '+c.use+'컵');clickIn(el,'사용량 선택 완료!')}clickIn(el,'보너스 받고 영업 계속하기')}
 function measureIn(el:HTMLElement,day:number,o:Order){if(day<3){for(const [i,v] of [o.left,o.right].entries()){clickIn(el,ingredients[drinks[o.drink].ingredients[i]].name);for(let n=0;n<units(v);n++)clickIn(el,'붓기');clickIn(el,'계량 완료')}}else{clickIn(el,ingredients[drinks[o.drink].ingredients[1]].name);if(day>=5)clickIn(el,day===5?'새 병 열기':'온전한 1 바꾸기');for(let n=0;n<units(o.right);n++)clickIn(el,'재료 덜기');clickIn(el,'계량 완료')}clickIn(el,day<3?'합치기':'재고 확인')}
 function labelIn(el:HTMLElement,day:number,o:Order){const n=day<3?units(o.left)+units(o.right):units(o.left)-units(o.right);for(let i=0;i<Math.floor(n/o.denominator);i++)clickIn(el,'온전한 수 늘리기');if(n%o.denominator===0)clickIn(el,'분자 줄이기');else for(let i=0;i<n%o.denominator;i++)clickIn(el,'분자 늘리기');clickIn(el,day<3?'완성량 확인':'남은 양 확인')}
 function stubMultiTouch(points:number){const original=Object.getOwnPropertyDescriptor(navigator,'maxTouchPoints');Object.defineProperty(navigator,'maxTouchPoints',{value:points,configurable:true});return()=>{if(original)Object.defineProperty(navigator,'maxTouchPoints',original);else Object.defineProperty(navigator,'maxTouchPoints',{value:0,configurable:true})}}
@@ -79,7 +79,7 @@ it('2P battle: one shared order area (not duplicated) plus two independent works
  localStorage.clear();
  vi.useFakeTimers();vi.setSystemTime(new Date(1000000));
  const {container}=render(<CafeApp/>);
- click('2인 플레이');click('대결 시작!');click('2P 직원 선택 →');click('대결 준비 완료! ▶');click('영업 시작! ▶');
+ click('2인 플레이');click('대결 시작!');click('2P 직원 선택 →');click('대결 준비 완료! ▶');click('영업 시작! ▶');click('알겠어요!');
  const panes=[...container.querySelectorAll<HTMLElement>('.workstation-pane')];
  expect(panes.length).toBe(2);
  // The order/customer area is shared — exactly one ticket and one customer lane, not one per player.
@@ -105,7 +105,7 @@ for(const [dayId,left,right,d] of [[1,3,2,8],[5,5,3,5],[6,16,9,5]])it('exact acc
 });
 it('one reproducible bonus position in orders 3 to 5',()=>{for(let seed=0;seed<100;seed++){const c=specialChallenge(seed,1);if(c.type!=='combine')throw new Error('expected combine challenge for day 1');expect(c.index).toBeGreaterThanOrEqual(2);expect(c.index).toBeLessThanOrEqual(4);expect(c).toEqual(specialChallenge(seed,1));expect(c.choicesA).toContain(c.a);expect(c.choicesB).toContain(c.b);expect(c.a+c.b).toBe(c.target)}});
 it('special order becomes an inventory-use challenge on DAY 3 to 6',()=>{for(const dayId of [3,4,5,6])for(let seed=0;seed<20;seed++){const c=specialChallenge(seed,dayId);if(c.type!=='use')throw new Error('expected use challenge for day '+dayId);expect(c.options).toContain(c.use);expect(c.use).toBe(c.stock-c.target);expect(c.use).toBeGreaterThan(0)}});
-it('screen BGM mapping and gameplay help duck without changing tracks',()=>{render(<CafeApp/>);expect(audio.setTrack).toHaveBeenLastCalledWith(0);click('1인 플레이');click('영업 준비 완료! ▶');fireEvent.click(screen.getByRole('button',{name:/^DAY 4/}));click('영업 시작! ▶');expect(audio.setTrack).toHaveBeenLastCalledWith(2);click('도움말');expect(audio.duck).toHaveBeenLastCalledWith(true);expect(audio.setTrack).toHaveBeenLastCalledWith(2);click('닫기');expect(audio.duck).toHaveBeenLastCalledWith(false);click('‹ DAY 선택');expect(audio.setTrack).toHaveBeenLastCalledWith(0);fireEvent.click(screen.getByRole('button',{name:/^DAY 1/}));click('영업 시작! ▶');expect(audio.setTrack).toHaveBeenLastCalledWith(1)});
+it('screen BGM mapping and gameplay help duck without changing tracks',()=>{render(<CafeApp/>);expect(audio.setTrack).toHaveBeenLastCalledWith(0);click('1인 플레이');click('영업 준비 완료! ▶');fireEvent.click(screen.getByRole('button',{name:/^DAY 4/}));click('영업 시작! ▶');click('알겠어요!');expect(audio.setTrack).toHaveBeenLastCalledWith(2);click('도움말');expect(audio.duck).toHaveBeenLastCalledWith(true);expect(audio.setTrack).toHaveBeenLastCalledWith(2);click('닫기');expect(audio.duck).toHaveBeenLastCalledWith(false);click('‹ DAY 선택');expect(audio.setTrack).toHaveBeenLastCalledWith(0);fireEvent.click(screen.getByRole('button',{name:/^DAY 1/}));click('영업 시작! ▶');click('알겠어요!');expect(audio.setTrack).toHaveBeenLastCalledWith(1)});
 it('grand completion unlocks once all six days have a record and the flag persists',()=>{
  localStorage.clear();
  const rec=(id:number)=>({score:1000+id,correct:6,attempts:6,bestCombo:5,elapsedMs:60000,satisfaction:90,stars:3});
@@ -165,4 +165,26 @@ it('full record reset clears every day, the master-celebrated flag, and the gran
  expect(Object.keys(saved.records).length).toBe(0);
  expect(saved.masterCelebrated).toBe(false);
  expect(screen.queryByRole('button',{name:'🏆 6일 영업 완주'})).toBeNull();
+});
+it('the reference-cup reminder shows on every start (not just the first ever), blocking gameplay input until dismissed each time',()=>{
+ localStorage.clear();
+ render(<CafeApp/>);
+ click('1인 플레이');click('영업 준비 완료! ▶');click('영업 시작! ▶');
+ expect(screen.getByRole('heading',{name:'분수카페의 기준컵'})).not.toBeNull();
+ const denomButtons=[...document.querySelectorAll<HTMLButtonElement>('.division-choices button')];
+ expect(denomButtons.length).toBeGreaterThan(0);
+ expect(denomButtons.every(b=>b.disabled)).toBe(true);
+ click('알겠어요!');
+ expect(screen.queryByRole('heading',{name:'분수카페의 기준컵'})).toBeNull();
+ click('‹ DAY 선택');click('영업 시작! ▶');
+ expect(screen.getByRole('heading',{name:'분수카페의 기준컵'})).not.toBeNull();
+ click('알겠어요!');
+});
+it('order ticket quantities carry a 컵 unit and the shared "기준컵 1컵 = 1" badge is shown once',()=>{
+ localStorage.clear();
+ render(<CafeApp/>);
+ click('1인 플레이');click('영업 준비 완료! ▶');click('영업 시작! ▶');click('알겠어요!');
+ expect(screen.getByText('기준컵 1컵 = 1')).not.toBeNull();
+ expect(document.querySelectorAll('.ticket-row .unit').length).toBeGreaterThan(0);
+ expect(document.querySelector('.ticket-row .unit')!.textContent).toBe('컵');
 });
