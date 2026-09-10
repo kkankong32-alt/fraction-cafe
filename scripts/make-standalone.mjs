@@ -21,3 +21,5 @@ html = html.replace('<html lang="ko">','<html lang="ko" data-standalone="true">'
 html = html.replace('</head>', '<!-- 더블클릭으로 실행 가능한 독립 실행 파일입니다. --></head>');
 await writeFile(resolve(root, 'index.html'), html, 'utf8');
 await cp(resolve(root,'audio'),resolve(root,'dist/audio'),{recursive:true});
+// Preserve the quiz subpath in every GitHub Pages build.
+await cp(resolve(root,'quiz'),resolve(root,'dist/quiz'),{recursive:true});

@@ -8,6 +8,14 @@
 
 https://kkankong32-alt.github.io/fraction-cafe/
 
+## 입장 퀴즈
+
+https://kkankong32-alt.github.io/fraction-cafe/quiz/
+
+10문항을 모두 풀고 7문항 이상 맞히면 기존 분수카페로 이동합니다.
+`quiz/config.js`의 상대 링크로 연결하며, 배포 빌드에 `dist/quiz/`가 포함됩니다.
+샘퀴즈 입력용 문항·정답·해설은 `quiz/샘퀴즈_입력용_10문항.txt`에 있습니다.
+
 ## 바로 실행
 
 프로젝트 최상위의 `index.html`을 더블클릭하면 별도 서버 없이 실행됩니다.
