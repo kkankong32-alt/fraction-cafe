@@ -1,9 +1,22 @@
+/* Root cause of tickets getting cropped: .customer-lane has no grid-template-rows, so its single implicit row
+   auto-sizes to whatever its tallest child (the ticket) naturally wants — NOT to the lane's own definite height.
+   Once the ticket's content got a bit bigger (icons/text below), that auto row could end up taller than the
+   lane's actual box (confirmed: lane height ~315px, but its auto row computed to ~375px on a wide/short window),
+   and since the lane clips overflow, the ticket's bottom edge — a whole ingredient row, on the affected screens —
+   got sheared off. Pinning the row to 1fr forces it to the lane's real height every time, so the ticket (and
+   everything inside it) has to fit/shrink within that instead of silently overflowing. */
+.customer-lane{grid-template-rows:minmax(0,1fr)}
 /* Order ticket polish: the base rule's slight rotate(1deg) "sticky note" tilt reads as crooked/misaligned rather
    than charming, so square it up. Its landscape-mode rule also caps the ingredient icon at a smaller max-height
    than the base rule does (2.3em vs 2.5em) — bump both up to something actually visible, and trim the fraction
    display ~10% since it was crowding the icon/label out. */
 .ticket{transform:none}
-.ticket-row>img{height:3.4em;max-height:3.4em}
+/* height:90% (not a fixed em) is load-bearing: the row is a flex:1;min-height:0 item whose actual height varies
+   with viewport/order content (a mixed number needs more room than a bare fraction), so the icon has to be able
+   to shrink with it. A flat fixed height here doesn't shrink, so on a tighter row it overflows the row — and
+   since the ticket clips overflow, that reads as numbers/art getting cropped. max-height only raises the ceiling
+   for when there IS room. */
+.ticket-row>img{height:90%;max-height:3.4em}
 .ticket-row>.mixed-number,.ticket-row>.whole-number{font-size:clamp(25px,2.25cqw,50px)}
 .ticket-row b{font-size:1.14em}
 /* Measuring-cup liquid: the base rule's meniscus line is a near-white highlight (border-top:#fff9), which reads
