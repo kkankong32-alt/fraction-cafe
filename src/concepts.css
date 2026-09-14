@@ -1,3 +1,9 @@
+/* Touch/tablet input fix: without this, some mobile browsers wait ~300ms after a tap to see if it's the start of
+   a double-tap-to-zoom before dispatching pointerdown/click, and may reinterpret a held finger as a scroll
+   gesture. manipulation tells the browser this button is only tapped/pressed, never zoomed or panned, so it can
+   dispatch pointer/click events immediately and not fight the long-press-to-repeat 붓기/비우기 buttons for the
+   gesture. */
+.game-stage button{touch-action:manipulation}
 /* Root cause of tickets getting cropped: .customer-lane has no grid-template-rows, so its single implicit row
    auto-sizes to whatever its tallest child (the ticket) naturally wants — NOT to the lane's own definite height.
    Once the ticket's content got a bit bigger (icons/text below), that auto row could end up taller than the

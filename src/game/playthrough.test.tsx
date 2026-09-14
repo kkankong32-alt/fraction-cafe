@@ -33,6 +33,71 @@ for(const day of days)it('DAY '+day.id+': six gated orders, wrong answers, pause
  }
  expect(done).toHaveBeenCalledTimes(1);expect(done.mock.calls[0][0]).toMatchObject({correct:6,denominatorAttempts:7,resultAttempts:12,bestCombo:5});expect(done.mock.calls[0][0].score).toBeGreaterThan(1000);
 });
+// HoldButton (붓기/비우기/재료 덜기/되돌리기) drives every "pour" through audio.playSfx('pour'), so counting those
+// calls is a precise, UI-agnostic way to check exactly how many steps a given input sequence produced — which is
+// the thing that was breaking on some touch devices: setPointerCapture throwing mid-handler used to abort the
+// whole pointerdown before the step (or the long-press timer) ever ran.
+function setupPourButton(){
+ vi.useFakeTimers();
+ const props={day:days[0],mode:'1P' as const,player:1,staffId:0,seed:112233,paused:false,onHelp:vi.fn(),onLearn:vi.fn(),onSettings:vi.fn(),onExit:vi.fn(),onComplete:vi.fn()};
+ render(<Gameplay {...props}/>);
+ const o=generateOrders(days[0],112233)[0];
+ click(o.denominator+'등분');
+ click(ingredients[drinks[o.drink].ingredients[0]].name);
+ const btn=screen.getByRole('button',{name:'붓기'}) as HTMLButtonElement;
+ const pourCount=()=>(audio.playSfx as unknown as {mock:{calls:unknown[][]}}).mock.calls.filter(c=>c[0]==='pour').length;
+ return {btn,pourCount};
+}
+it('a short click pours exactly once (Test A/C: plain tap/click)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ fireEvent.click(btn);
+ expect(pourCount()-before).toBe(1);
+});
+it('holding the button down keeps pouring roughly every 300ms, same as before (Test B: long-press repeat)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ fireEvent.pointerDown(btn,{pointerId:1});
+ act(()=>vi.advanceTimersByTime(900));
+ fireEvent.pointerUp(btn,{pointerId:1});
+ fireEvent.click(btn);
+ expect(pourCount()-before).toBe(4);
+});
+it('a full pointerdown+pointerup+click tap — what real touch/mouse browsers actually dispatch for one press — pours exactly once, never twice (Test F: no duplicate firing)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ fireEvent.pointerDown(btn,{pointerId:1});
+ fireEvent.pointerUp(btn,{pointerId:1});
+ fireEvent.click(btn);
+ expect(pourCount()-before).toBe(1);
+});
+it('still pours exactly once even when setPointerCapture throws (device does not support it) — the interaction no longer gets silently swallowed (Test D)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const original=Element.prototype.setPointerCapture;
+ Element.prototype.setPointerCapture=()=>{throw new Error('not supported on this device')};
+ const before=pourCount();
+ try{
+  fireEvent.pointerDown(btn,{pointerId:1});
+  fireEvent.pointerUp(btn,{pointerId:1});
+  fireEvent.click(btn);
+  expect(pourCount()-before).toBe(1);
+ }finally{Element.prototype.setPointerCapture=original}
+});
+it('dragging off the button mid-hold stops the repeat, with no leftover interval still firing after release (Test E)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ fireEvent.pointerDown(btn,{pointerId:1});
+ act(()=>vi.advanceTimersByTime(650));
+ fireEvent.pointerLeave(btn,{pointerId:1});
+ act(()=>vi.advanceTimersByTime(1500));
+ expect(pourCount()-before).toBe(3);
+});
+it('several quick taps in a row each pour exactly once, with none missed or duplicated (Test F)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ for(let i=0;i<3;i++){fireEvent.pointerDown(btn,{pointerId:1});fireEvent.pointerUp(btn,{pointerId:1});fireEvent.click(btn)}
+ expect(pourCount()-before).toBe(3);
+});
 it('2인 대결 is always clickable on a non-touch PC and opens an info modal instead of disabling anything',()=>{
  localStorage.clear();render(<CafeApp/>);
  click('2인 플레이');
