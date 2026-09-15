@@ -83,6 +83,15 @@ it('still pours exactly once even when setPointerCapture throws (device does not
   expect(pourCount()-before).toBe(1);
  }finally{Element.prototype.setPointerCapture=original}
 });
+it('a pointercancel (e.g. a second touch appearing elsewhere in 2P) does not leave the button stuck forever — a later independent tap still pours (regression: reported 2P pour failures)',()=>{
+ const {btn,pourCount}=setupPourButton();
+ const before=pourCount();
+ fireEvent.pointerDown(btn,{pointerId:1}); // pours once immediately
+ fireEvent.pointerCancel(btn,{pointerId:1}); // no click follows a real cancel — the old boolean flag stayed "handled" forever after this
+ act(()=>vi.advanceTimersByTime(500)); // well past the pointerup→click gap the skip-window is sized for
+ fireEvent.click(btn); // a later, unrelated tap where pointerdown doesn't fire this time — must not be swallowed
+ expect(pourCount()-before).toBe(2);
+});
 it('dragging off the button mid-hold stops the repeat, with no leftover interval still firing after release (Test E)',()=>{
  const {btn,pourCount}=setupPourButton();
  const before=pourCount();
